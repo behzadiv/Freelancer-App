@@ -4,10 +4,6 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --primary-900: 20 50 30;
-}
-
 @layer base {
   :root {
     --background-app-rgb: 255, 255, 255;
@@ -74,4 +70,9 @@ button {
   cursor: pointer;
   outline: none;
   display: block;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
 }
