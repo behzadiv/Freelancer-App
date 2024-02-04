@@ -39,6 +39,17 @@
     --color-red-300: 252, 165, 165;
   }
 }
+@layer components {
+  .textField_input {
+    @apply w-full py-2 px-4 text-primary-800 border border-gray-100 bg-gray-100 rounded-xl hover:border-primary-300 focus:border-primary-300 focus:shadow-md focus:shadow-primary-200 focus:bg-white transition-all duration-300 ease-out;
+  }
+  .btn {
+    @apply py-2 px-4 font-bold rounded-xl transition-all duration-300;
+  }
+  .btn-primary {
+    @apply bg-primary-900 text-secondary-50 hover:bg-primary-800 shadow-lg shadow-primary-300;
+  }
+}
 
 html,
 body {
@@ -64,6 +75,6 @@ button {
   outline: none;
   display: block;
 }
-label{
+label {
   display: block;
 }
