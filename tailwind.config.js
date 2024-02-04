@@ -44,6 +44,10 @@ export default {
         warning: withOpacity("--color-warning"),
         error: withOpacity("--color-error"),
       },
+      container: {
+        center: true,
+        padding: "1rem",
+      },
       fontFamily: {
         sans: ["Vazir", ...fontFamily.sans],
       },
