@@ -62,4 +62,8 @@ body {
 button {
   cursor: pointer;
   outline: none;
+  display: block;
+}
+label{
+  display: block;
 }
