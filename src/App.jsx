@@ -4,7 +4,7 @@ import './App.css'
 function App() {
 
   return (
-    <h1>Freelance - App</h1>
+    <h1 className='text-red-400'>Freelance - App</h1>
   )
 }
 
