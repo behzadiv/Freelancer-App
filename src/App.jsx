@@ -1,11 +1,14 @@
-import { useState } from 'react'
-import './App.css'
+import { Route, Routes } from "react-router-dom";
+import "./App.css";
 
 function App() {
-
   return (
-    <h1 className='text-primary-900 text-4xl  font-bold bg-red-300 container'>Freelance - App</h1>
-  )
+    <div className="container">
+      <Routes>
+        <Route path="/auth" element={""} />
+      </Routes>
+    </div>
+  );
 }
 
-export default App
+export default App;
