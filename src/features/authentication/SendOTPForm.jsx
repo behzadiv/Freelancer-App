@@ -19,7 +19,7 @@ const SendOTPForm = ({ setStep }) => {
       setStep(2);
       toast.success("کد تایید ارسال شد.");
     } catch (error) {
-      toast.error(error?.message);
+      toast.error(error?.response?.data?.message);
     }
   };
 
