@@ -14,7 +14,7 @@ const CheckOTPForm = () => {
         inputType="number"
         renderSeparator={<span>-</span>}
         renderInput={(props) => <input {...props} />}
-        containerStyle="flex flex-row-reverse justif-center gap-x-2"
+        containerStyle="flex flex-row-reverse justify-center gap-x-2"
         inputStyle={{
           width: "2.5rem",
           padding: "0.5rem 0.2rem",

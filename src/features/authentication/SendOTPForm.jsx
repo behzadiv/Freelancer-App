@@ -4,7 +4,7 @@ import { useMutation } from "@tanstack/react-query";
 import { getOTP } from "../../services/authService";
 import TextField from "../../ui/TextField";
 
-const SendOTPForm = () => {
+const SendOTPForm = ({ setStep }) => {
   const [phoneNumber, setPhoneNumber] = useState("");
 
   const { isPending, error, data, mutateAsync } = useMutation({
@@ -14,7 +14,8 @@ const SendOTPForm = () => {
   const sendOTPHandler = async (e) => {
     e.preventDefault();
     try {
-      const data = await mutateAsync({ phoneNumber });
+      //const data = await mutateAsync({ phoneNumber });
+      setStep(2);
       toast.success("کد تایید ارسال شد.");
     } catch (error) {
       toast.error(error?.message);
@@ -22,7 +23,7 @@ const SendOTPForm = () => {
   };
 
   return (
-    <form className="space-y-5" onSubmit={sendOTPHandler}>
+    <form className="space-y-5" onSubmit={sendOTPHandler} >
       <TextField
         label="شماره موبایل"
         name="phoneNumber"
