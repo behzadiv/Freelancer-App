@@ -1,19 +1,38 @@
 import { useState } from "react";
+import toast from "react-hot-toast";
+import { useMutation } from "@tanstack/react-query";
+import { getOTP } from "../../services/authService";
 import TextField from "../../ui/TextField";
 
 const SendOTPForm = () => {
   const [phoneNumber, setPhoneNumber] = useState("");
 
+  const { isPending, error, data, mutateAsync } = useMutation({
+    mutationFn: getOTP,
+  });
+
+  const sendOTPHandler = async (e) => {
+    e.preventDefault();
+    try {
+      const data = await mutateAsync({ phoneNumber });
+      toast.success("کد تایید ارسال شد.");
+    } catch (error) {
+      toast.error(error?.message);
+    }
+  };
+
   return (
-    <div className="space-y-5">
+    <form className="space-y-5" onSubmit={sendOTPHandler}>
       <TextField
         label="شماره موبایل"
         name="phoneNumber"
         value={phoneNumber}
         onChange={(e) => setPhoneNumber(e.target.value)}
       />
-      <button className="btn btn-primary w-full">ارسال کد تایید</button>
-    </div>
+      <button className="btn btn-primary w-full" type="submit">
+        ارسال کد تایید
+      </button>
+    </form>
   );
 };
 
