@@ -4,7 +4,7 @@ import { useMutation } from "@tanstack/react-query";
 import OTPInput from "react-otp-input";
 import toast from "react-hot-toast";
 
-const CheckOTPForm = () => {
+const CheckOTPForm = ({ phoneNumber }) => {
   const [otp, setOtp] = useState("");
 
   const { data, isPending, error, mutateAsync } = useMutation({
@@ -13,7 +13,7 @@ const CheckOTPForm = () => {
   const checkOtpHandler = async (e) => {
     e.preventDefault();
     try {
-      const data = await mutateAsync({ phoneNumber:"", otp });
+      const data = await mutateAsync({ phoneNumber, otp });
       toast.success(data.message);
     } catch (error) {
       toast.error(error?.response?.data?.message);
