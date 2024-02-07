@@ -7,7 +7,7 @@ import { HiArrowRight } from "react-icons/hi";
 
 const RESEND_OTP = 90;
 
-const CheckOTPForm = ({ phoneNumber, onStepHandler }) => {
+const CheckOTPForm = ({ phoneNumber, onStepHandler, onResendOtp }) => {
   const [otp, setOtp] = useState("");
   const [time, setTime] = useState(RESEND_OTP);
 
@@ -22,6 +22,9 @@ const CheckOTPForm = ({ phoneNumber, onStepHandler }) => {
     } catch (error) {
       toast.error(error?.response?.data?.message);
     }
+  };
+  const resendOtp = () => {
+    onResendOtp, setTime(RESEND_OTP);
   };
 
   useEffect(() => {
@@ -57,7 +60,7 @@ const CheckOTPForm = ({ phoneNumber, onStepHandler }) => {
               {time} ثانیه تا ارسال مجدد کد
             </p>
           ) : (
-            <button className="text-sm text-secondary-500">
+            <button className="text-sm text-secondary-500" onClick={resendOtp}>
               ارسال مجدد کد
             </button>
           )}
