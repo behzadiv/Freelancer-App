@@ -17,7 +17,12 @@ const AuthContainer = () => {
           />
         );
       case 2:
-        return <CheckOTPForm phoneNumber={phoneNumber} />;
+        return (
+          <CheckOTPForm
+            phoneNumber={phoneNumber}
+            onStepHandler={()=>setStep((s) => s - 1)}
+          />
+        );
       default:
         return null;
     }
