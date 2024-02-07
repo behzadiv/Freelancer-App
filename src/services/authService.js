@@ -6,5 +6,7 @@ export const getOTP = (data) => {
   });
 };
 export const checkOTP = (data) => {
-  return http.post("/user/check-otp", data);
+  return http.post("/user/check-otp", data).then(({ data }) => {
+    return data.data;
+  });
 };
