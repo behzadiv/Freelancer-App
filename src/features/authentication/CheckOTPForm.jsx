@@ -1,12 +1,15 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { checkOTP } from "../../services/authService";
 import { useMutation } from "@tanstack/react-query";
 import OTPInput from "react-otp-input";
 import toast from "react-hot-toast";
 import { HiArrowRight } from "react-icons/hi";
 
+const RESEND_OTP = 90;
+
 const CheckOTPForm = ({ phoneNumber, onStepHandler }) => {
   const [otp, setOtp] = useState("");
+  const [time, setTime] = useState(RESEND_OTP);
 
   const { data, isPending, error, mutateAsync } = useMutation({
     mutationFn: checkOTP,
@@ -21,6 +24,20 @@ const CheckOTPForm = ({ phoneNumber, onStepHandler }) => {
     }
   };
 
+  useEffect(() => {
+    const timer =
+      time > 0 &&
+      setInterval(() => {
+        setTime((t) => t - 1);
+      }, 1000);
+
+    return () => {
+      if (timer) {
+        clearInterval(timer);
+      }
+    };
+  }, [time]);
+
   return (
     <div>
       <button
@@ -32,8 +49,19 @@ const CheckOTPForm = ({ phoneNumber, onStepHandler }) => {
         </span>
         <span className="text-sm">بازگشت</span>
       </button>
-      <form className="space-y-4" onSubmit={checkOtpHandler}>
-        <p className="font-bold text-secondary-800"> کد تایید را وارد کنید</p>
+      <form className="space-y-6" onSubmit={checkOtpHandler}>
+        <div className="flex justify-between items-center pl-4">
+          <p className="font-bold text-secondary-800"> کد تایید را وارد کنید</p>
+          {time ? (
+            <p className="text-sm text-secondary-500">
+              {time} ثانیه تا ارسال مجدد کد
+            </p>
+          ) : (
+            <button className="text-sm text-secondary-500">
+              ارسال مجدد کد
+            </button>
+          )}
+        </div>
         <OTPInput
           value={otp}
           onChange={setOtp}
