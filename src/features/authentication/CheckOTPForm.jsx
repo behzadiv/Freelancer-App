@@ -7,9 +7,15 @@ import { HiArrowRight } from "react-icons/hi";
 
 const RESEND_OTP = 90;
 
-const CheckOTPForm = ({ phoneNumber, onStepHandler, onResendOtp }) => {
+const CheckOTPForm = ({
+  phoneNumber,
+  onStepHandler,
+  onResendOtp,
+  otpResponse,
+}) => {
   const [otp, setOtp] = useState("");
   const [time, setTime] = useState(RESEND_OTP);
+  console.log(otpResponse);
 
   const { data, isPending, error, mutateAsync } = useMutation({
     mutationFn: checkOTP,
@@ -51,6 +57,13 @@ const CheckOTPForm = ({ phoneNumber, onStepHandler, onResendOtp }) => {
           <HiArrowRight />
         </span>
         <span className="text-sm">بازگشت</span>
+      </button>
+      <button>
+        {otpResponse && (
+          <p className="text-primary-900 text-sm mb-4">
+            {otpResponse?.message}
+          </p>
+        )}
       </button>
       <form className="space-y-6" onSubmit={checkOtpHandler}>
         <div className="flex justify-between items-center pl-4">

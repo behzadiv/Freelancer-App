@@ -8,14 +8,14 @@ import { getOTP } from "../../services/authService";
 const AuthContainer = () => {
   const [step, setStep] = useState(1);
   const [phoneNumber, setPhoneNumber] = useState("");
-  const { isPending:isOtpPending, mutateAsync } = useMutation({
+  const { isPending:isOtpPending, mutateAsync,data:otpResponse } = useMutation({
     mutationFn: getOTP,
   });
 
   const sendOTPHandler = async (e) => {
     e.preventDefault();
     try {
-      // const data = await mutateAsync({ phoneNumber });
+      const data = await mutateAsync({ phoneNumber });
       setStep(2);
       toast.success("کد تایید ارسال شد.");
     } catch (error) {
@@ -41,6 +41,7 @@ const AuthContainer = () => {
             phoneNumber={phoneNumber}
             onStepHandler={() => setStep((s) => s - 1)}
             onResendOtp={sendOTPHandler}
+            otpResponse={otpResponse}
           />
         );
       default:
