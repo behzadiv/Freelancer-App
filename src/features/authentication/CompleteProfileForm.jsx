@@ -24,13 +24,29 @@ const CompleteProfileForm = () => {
         value={email}
       />
       <div className="flex justify-center gap-x-8">
-        <div className="flex justify-center gap-x-1 items-center">
-          <input type="radio" name="role" id="OWNER" value="OWNER" className="cursor-pointer w-4 h-4 form-radio" />
-          <label className="cursor-pointer" htmlFor="OWNER">کارفرما</label>
+        <div className="flex justify-center gap-x-2 items-center">
+          <input
+            type="radio"
+            name="role"
+            id="OWNER"
+            value="OWNER"
+            className="cursor-pointer w-4 h-4 form-radio text-primary-900 focus:ring-primary-500"
+          />
+          <label className="cursor-pointer" htmlFor="OWNER">
+            کارفرما
+          </label>
         </div>
-        <div className="flex justify-center gap-x-1 items-center">
-          <input type="radio" name="role" id="FREELANCER" value="FREELANCER" className="cursor-pointer w-4 h-4 form-radio" />
-          <label className="cursor-pointer" htmlFor="FREELANCER">فریلنسر</label>
+        <div className="flex justify-center gap-x-2 items-center">
+          <input
+            type="radio"
+            name="role"
+            id="FREELANCER"
+            value="FREELANCER"
+            className="cursor-pointer w-4 h-4 form-radio text-primary-900 focus:ring-primary-500"
+          />
+          <label className="cursor-pointer" htmlFor="FREELANCER">
+            فریلنسر
+          </label>
         </div>
       </div>
       <button className="btn btn-primary w-full">تایید</button>
