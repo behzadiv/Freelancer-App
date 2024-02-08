@@ -4,6 +4,7 @@ import { useMutation } from "@tanstack/react-query";
 import OTPInput from "react-otp-input";
 import toast from "react-hot-toast";
 import { HiArrowRight } from "react-icons/hi";
+import Loading from "../../ui/Loading";
 
 const RESEND_OTP = 90;
 
@@ -93,9 +94,13 @@ const CheckOTPForm = ({
             borderRadius: ".5rem",
           }}
         />
-        <button className="w-full btn btn-primary" type="submit">
-          تایید
-        </button>
+        {isPending ? (
+          <Loading />
+        ) : (
+          <button className="w-full btn btn-primary" type="submit">
+            تایید
+          </button>
+        )}
       </form>
     </div>
   );
