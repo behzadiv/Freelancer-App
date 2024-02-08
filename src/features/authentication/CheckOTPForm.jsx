@@ -1,9 +1,10 @@
 import { useEffect, useState } from "react";
-import { checkOTP } from "../../services/authService";
-import { useMutation } from "@tanstack/react-query";
+import { useNavigate } from "react-router";
 import OTPInput from "react-otp-input";
+import { useMutation } from "@tanstack/react-query";
 import toast from "react-hot-toast";
 import { HiArrowRight } from "react-icons/hi";
+import { checkOTP } from "../../services/authService";
 import Loading from "../../ui/Loading";
 
 const RESEND_OTP = 90;
@@ -16,16 +17,18 @@ const CheckOTPForm = ({
 }) => {
   const [otp, setOtp] = useState("");
   const [time, setTime] = useState(RESEND_OTP);
-  console.log(otpResponse);
+  const navigate = useNavigate();
 
   const { data, isPending, error, mutateAsync } = useMutation({
     mutationFn: checkOTP,
   });
+
   const checkOtpHandler = async (e) => {
     e.preventDefault();
     try {
       const data = await mutateAsync({ phoneNumber, otp });
       toast.success(data.message);
+      if (data?.user?.isActive === false) navigate("/complete-profile");
     } catch (error) {
       toast.error(error?.response?.data?.message);
     }
