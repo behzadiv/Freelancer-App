@@ -1,9 +1,11 @@
 import { useState } from "react";
 import TextField from "../../ui/TextField";
+import RadioInput from "../../ui/RadioInput";
 
 const CompleteProfileForm = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
+  const [role, setRole] = useState("");
 
   return (
     <form className="w-full space-y-8 sm:max-w-sm">
@@ -24,30 +26,20 @@ const CompleteProfileForm = () => {
         value={email}
       />
       <div className="flex justify-center gap-x-8">
-        <div className="flex justify-center gap-x-2 items-center">
-          <input
-            type="radio"
-            name="role"
-            id="OWNER"
-            value="OWNER"
-            className="cursor-pointer w-4 h-4 form-radio text-primary-900 focus:ring-primary-500"
-          />
-          <label className="cursor-pointer" htmlFor="OWNER">
-            کارفرما
-          </label>
-        </div>
-        <div className="flex justify-center gap-x-2 items-center">
-          <input
-            type="radio"
-            name="role"
-            id="FREELANCER"
-            value="FREELANCER"
-            className="cursor-pointer w-4 h-4 form-radio text-primary-900 focus:ring-primary-500"
-          />
-          <label className="cursor-pointer" htmlFor="FREELANCER">
-            فریلنسر
-          </label>
-        </div>
+        <RadioInput
+          label={"کارفرما"}
+          name={"role"}
+          value={"OWNER"}
+          onChange={(e) => setRole(e.target.value)}
+          checked={role === "OWNER"}
+        />
+        <RadioInput
+          label={"فریلنسر"}
+          name={"role"}
+          value={"FREELANCER"}
+          onChange={(e) => setRole(e.target.value)}
+          checked={role === "FREELANCER"}
+        />
       </div>
       <button className="btn btn-primary w-full">تایید</button>
     </form>
