@@ -26,9 +26,17 @@ const CheckOTPForm = ({
   const checkOtpHandler = async (e) => {
     e.preventDefault();
     try {
-      const data = await mutateAsync({ phoneNumber, otp });
-      toast.success(data.message);
-      if (data?.user?.isActive === false) navigate("/complete-profile");
+      const { user, message } = await mutateAsync({ phoneNumber, otp });
+      toast.success(message);
+      if (!user.isActive) return navigate("/complete-profile");
+      if (user.status !== 2) {
+        navigate("/");
+        return toast("پروفایل شما در حال تایید است", {
+          icon: "👏",
+        });
+      }
+      //if (user.role === "OWNER") return navigate("/owner");
+      //if (user.role === "FREELANCER") return navigate("/freelancer");
     } catch (error) {
       toast.error(error?.response?.data?.message);
     }
