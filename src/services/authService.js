@@ -10,3 +10,8 @@ export const checkOTP = (data) => {
     return data.data;
   });
 };
+export const completeProfile = (data) => {
+  return http.post("/user/complete-profile", data).then(({ data }) => {
+    return data.data;
+  });
+};
