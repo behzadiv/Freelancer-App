@@ -15,3 +15,8 @@ export const completeProfile = (data) => {
     return data.data;
   });
 };
+export const getUser = () => {
+  return http.get("/user/profile").then(({ data }) => {
+    return data.data;
+  });
+};
