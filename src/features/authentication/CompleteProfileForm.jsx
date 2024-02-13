@@ -37,7 +37,7 @@ const CompleteProfileForm = () => {
   };
 
   return (
-    <form className="w-full space-y-8 sm:max-w-sm" onSubmit={handleSubmit}>
+    <form className="w-full space-y-8 container xl:max-w-screen-xl" onSubmit={handleSubmit}>
       <TextField
         label="نام و نام خانوادگی"
         name="name"

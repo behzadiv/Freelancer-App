@@ -15,7 +15,7 @@ const AuthContainer = () => {
   const sendOTPHandler = async (e) => {
     e.preventDefault();
     try {
-      const data = await mutateAsync({ phoneNumber });
+      //const data = await mutateAsync({ phoneNumber });
       setStep(2);
       toast.success("کد تایید ارسال شد.");
     } catch (error) {
@@ -49,7 +49,7 @@ const AuthContainer = () => {
     }
   };
 
-  return <div className="w-full sm:max-w-sm">{renderStep()}</div>;
+  return <div className="w-full">{renderStep()}</div>;
 };
 
 export default AuthContainer;

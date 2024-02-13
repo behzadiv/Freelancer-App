@@ -7,6 +7,8 @@ import NotFound from "./pages/NotFound";
 import Home from "./pages/Home";
 import CompleteProfile from "./pages/CompleteProfile";
 import "./App.css";
+import Owner from "./pages/Owner";
+import AppLayout from "./ui/AppLayout";
 
 const queryClinet = new QueryClient();
 
@@ -14,14 +16,15 @@ function App() {
   return (
     <QueryClientProvider client={queryClinet}>
       <Toaster />
-      <div className="container">
-        <Routes>
-          <Route path="/auth" element={<Auth />} />
-          <Route path="/complete-profile" element={<CompleteProfile />} />
-          <Route path="/" element={<Home />} />
-          <Route path="*" element={<NotFound />} />
-        </Routes>
-      </div>
+      <Routes>
+        <Route path="/auth" element={<Auth />} />
+        <Route path="/complete-profile" element={<CompleteProfile />} />
+        <Route element={<AppLayout />}>
+          <Route path="/owner" element={<Owner />} />
+        </Route>
+        <Route path="/" element={<Home />} />
+        <Route path="*" element={<NotFound />} />
+      </Routes>
     </QueryClientProvider>
   );
 }
