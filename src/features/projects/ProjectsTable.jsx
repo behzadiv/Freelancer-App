@@ -26,7 +26,7 @@ const ProjectsTable = () => {
         </thead>
         <tbody>
           {projects.map((project, index) => {
-            return <TableRow index={index} data={project} />;
+            return <TableRow index={index} data={project} key={project._id}/>;
           })}
         </tbody>
       </table>

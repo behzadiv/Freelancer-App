@@ -1,6 +1,6 @@
 const TableRow = ({ data, index }) => {
   return (
-    <tr key={data.id}>
+    <tr>
       <td>{index + 1}</td>
       <td>{data.title}</td>
       <td>{data.category.title}</td>
