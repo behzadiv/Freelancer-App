@@ -1,8 +1,10 @@
+import truncateString from "../utils/truncateString";
+
 const TableRow = ({ data, index }) => {
   return (
     <tr>
       <td>{index + 1}</td>
-      <td>{data.title}</td>
+      <td>{truncateString(data.title,30)}</td>
       <td>{data.category.title}</td>
       <td>{data.budget}</td>
       <td>{data.deadline}</td>
