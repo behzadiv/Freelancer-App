@@ -1,3 +1,4 @@
+import localDateShort from "../utils/localDateShort";
 import truncateString from "../utils/truncateString";
 
 const TableRow = ({ data, index }) => {
@@ -7,7 +8,7 @@ const TableRow = ({ data, index }) => {
       <td>{truncateString(data.title,30)}</td>
       <td>{data.category.title}</td>
       <td>{data.budget}</td>
-      <td>{data.deadline}</td>
+      <td>{localDateShort(data.deadline)}</td>
       <td>
         <div className="flex gap-2 justify-center flex-wrap max-w-[200px]">
           {data.tags.map((tag) => {
