@@ -1,13 +1,14 @@
 import localDateShort from "../utils/localDateShort";
+import toPersianFormat from "../utils/toPersianFormat";
 import truncateString from "../utils/truncateString";
 
 const TableRow = ({ data, index }) => {
   return (
     <tr>
       <td>{index + 1}</td>
-      <td>{truncateString(data.title,30)}</td>
+      <td>{truncateString(data.title, 30)}</td>
       <td>{data.category.title}</td>
-      <td>{data.budget}</td>
+      <td>{toPersianFormat(data.budget)}</td>
       <td>{localDateShort(data.deadline)}</td>
       <td>
         <div className="flex gap-2 justify-center flex-wrap max-w-[200px]">
