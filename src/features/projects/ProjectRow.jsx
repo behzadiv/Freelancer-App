@@ -1,10 +1,11 @@
-import localDateShort from "../utils/localDateShort";
-import toPersianFormat from "../utils/toPersianFormat";
-import truncateString from "../utils/truncateString";
+import Table from "../../ui/Table";
+import localDateShort from "../../utils/localDateShort";
+import toPersianFormat from "../../utils/toPersianFormat";
+import truncateString from "../../utils/truncateString";
 
-const TableRow = ({ data, index }) => {
+const ProjectRow = ({ data, index }) => {
   return (
-    <tr>
+    <Table.Row>
       <td>{index + 1}</td>
       <td>{truncateString(data.title, 30)}</td>
       <td>{data.category.title}</td>
@@ -30,7 +31,7 @@ const TableRow = ({ data, index }) => {
         )}
       </td>
       <td></td>
-    </tr>
+    </Table.Row>
   );
 };
-export default TableRow;
+export default ProjectRow;
