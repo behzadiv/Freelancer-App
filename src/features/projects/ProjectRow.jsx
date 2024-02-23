@@ -1,9 +1,16 @@
+import { useState } from "react";
+import Modal from "../../ui/Modal";
 import Table from "../../ui/Table";
 import localDateShort from "../../utils/localDateShort";
 import toPersianFormat from "../../utils/toPersianFormat";
 import truncateString from "../../utils/truncateString";
+import { LuPencilLine } from "react-icons/lu";
+import { IoTrashOutline } from "react-icons/io5";
+
 
 const ProjectRow = ({ data, index }) => {
+  const [isEditOpen, setIsEditOpen] = useState(false);
+  
   return (
     <Table.Row>
       <td>{index + 1}</td>
@@ -30,7 +37,23 @@ const ProjectRow = ({ data, index }) => {
           <span className="badge badge--danger">بسته</span>
         )}
       </td>
-      <td></td>
+      <td>
+        <div className="flex justify-center gap-x-4">
+          <button onClick={() => setIsEditOpen(true)}>
+            <LuPencilLine className="w-5 h-5 text-primary-900" />
+          </button>
+          <Modal
+            title={"title"}
+            open={isEditOpen}
+            onClose={() => setIsEditOpen(false)}
+          >
+            this is modal
+          </Modal>
+          <button>
+            <IoTrashOutline className="w-5 h-5 text-error" />
+          </button>
+        </div>
+      </td>
     </Table.Row>
   );
 };
