@@ -7,10 +7,10 @@ import truncateString from "../../utils/truncateString";
 import { LuPencilLine } from "react-icons/lu";
 import { IoTrashOutline } from "react-icons/io5";
 
-
 const ProjectRow = ({ data, index }) => {
   const [isEditOpen, setIsEditOpen] = useState(false);
-  
+  const [isRemoveOpen, setIsRemoveOpen] = useState(false);
+
   return (
     <Table.Row>
       <td>{index + 1}</td>
@@ -39,19 +39,30 @@ const ProjectRow = ({ data, index }) => {
       </td>
       <td>
         <div className="flex justify-center gap-x-4">
-          <button onClick={() => setIsEditOpen(true)}>
-            <LuPencilLine className="w-5 h-5 text-primary-900" />
-          </button>
-          <Modal
-            title={"title"}
-            open={isEditOpen}
-            onClose={() => setIsEditOpen(false)}
-          >
-            this is modal
-          </Modal>
-          <button>
-            <IoTrashOutline className="w-5 h-5 text-error" />
-          </button>
+          <>
+            <button onClick={() => setIsEditOpen(true)}>
+              <LuPencilLine className="w-5 h-5 text-primary-900" />
+            </button>
+            <Modal
+              title={`ویرایش ${data.title}`}
+              open={isEditOpen}
+              onClose={() => setIsEditOpen(false)}
+            >
+              this is modal
+            </Modal>
+          </>
+          <>
+            <button onClick={() => setIsRemoveOpen(true)}>
+              <IoTrashOutline className="w-5 h-5 text-error" />
+            </button>
+            <Modal
+              title={`حذف ${data.title}`}
+              open={isRemoveOpen}
+              onClose={() => setIsRemoveOpen(false)}
+            >
+              this is modal
+            </Modal>
+          </>
         </div>
       </td>
     </Table.Row>
