@@ -6,6 +6,7 @@ import toPersianFormat from "../../utils/toPersianFormat";
 import truncateString from "../../utils/truncateString";
 import { LuPencilLine } from "react-icons/lu";
 import { IoTrashOutline } from "react-icons/io5";
+import DeleteProject from "./DeleteProject";
 
 const ProjectRow = ({ data, index }) => {
   const [isEditOpen, setIsEditOpen] = useState(false);
@@ -60,7 +61,11 @@ const ProjectRow = ({ data, index }) => {
               open={isRemoveOpen}
               onClose={() => setIsRemoveOpen(false)}
             >
-              this is modal
+              <DeleteProject
+                onClose={() => setIsRemoveOpen(false)}
+                onConfirm={() => {}}
+                resourceName={data.title}
+              />
             </Modal>
           </>
         </div>
