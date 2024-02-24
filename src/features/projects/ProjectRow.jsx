@@ -7,10 +7,12 @@ import truncateString from "../../utils/truncateString";
 import { LuPencilLine } from "react-icons/lu";
 import { IoTrashOutline } from "react-icons/io5";
 import DeleteProject from "./DeleteProject";
+import useRemoveProject from "./useRemoveProject";
 
 const ProjectRow = ({ data, index }) => {
   const [isEditOpen, setIsEditOpen] = useState(false);
   const [isRemoveOpen, setIsRemoveOpen] = useState(false);
+  const { removeProject } = useRemoveProject();
 
   return (
     <Table.Row>
@@ -63,7 +65,7 @@ const ProjectRow = ({ data, index }) => {
             >
               <DeleteProject
                 onClose={() => setIsRemoveOpen(false)}
-                onConfirm={() => {}}
+                onConfirm={() => removeProject(data._id)}
                 resourceName={data.title}
               />
             </Modal>

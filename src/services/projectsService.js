@@ -5,3 +5,8 @@ export const getOwnerProjectsApi = () => {
     return data.data;
   });
 };
+export const removeProjectApi = (id) => {
+  return http.delete(`/project/${id}`).then(({ data }) => {
+    return data.data;
+  });
+};
