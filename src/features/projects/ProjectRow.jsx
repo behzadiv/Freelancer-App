@@ -65,7 +65,11 @@ const ProjectRow = ({ data, index }) => {
             >
               <DeleteProject
                 onClose={() => setIsRemoveOpen(false)}
-                onConfirm={() => removeProject(data._id)}
+                onConfirm={() =>
+                  removeProject(data._id, {
+                    onSuccess: () => setIsRemoveOpen(false),
+                  })
+                }
                 resourceName={data.title}
               />
             </Modal>
