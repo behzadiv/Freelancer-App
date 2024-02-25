@@ -1,16 +1,14 @@
-const TextField = ({ label, name, value, onChange }) => {
-
+const TextField = ({ label, name, register, type = "text" }) => {
   return (
     <div>
       <label htmlFor={name} className="mb-2 block">
         {label}
       </label>
       <input
-        type="text"
+        type={type}
         id={name}
         name={name}
-        value={value}
-        onChange={onChange}
+        {...register(name)}
         className="textField_input"
         autoComplete="off"
       />

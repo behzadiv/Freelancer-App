@@ -1,20 +1,10 @@
 import TextField from "../../ui/TextField";
 import Loading from "../../ui/Loading";
 
-const SendOTPForm = ({
-  phoneNumber,
-  onChange,
-  isOtpPending,
-  onSendOTPHandler,
-}) => {
+const SendOTPForm = ({ register, isOtpPending, onSendOTPHandler }) => {
   return (
     <form className="space-y-5" onSubmit={onSendOTPHandler}>
-      <TextField
-        label="شماره موبایل"
-        name="phoneNumber"
-        value={phoneNumber}
-        onChange={onChange}
-      />
+      <TextField label="شماره موبایل" name="phoneNumber" register={register} />
       {isOtpPending ? (
         <Loading />
       ) : (
