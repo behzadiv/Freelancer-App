@@ -6,21 +6,19 @@ import { completeProfile } from "../../services/authService";
 import TextField from "../../ui/TextField";
 import RadioInput from "../../ui/RadioInput";
 import Loading from "../../ui/Loading";
+import { useForm } from "react-hook-form";
 
 const CompleteProfileForm = () => {
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
-  const [role, setRole] = useState("");
+  const { register, handleSubmit, watch } = useForm();
   const navigate = useNavigate();
 
   const { isPending, data, mutateAsync } = useMutation({
     mutationFn: completeProfile,
   });
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
+  const handleCmpleteProfile = async (data) => {
     try {
-      const { user, message } = await mutateAsync({ name, email, role });
+      const { user, message } = await mutateAsync(data);
       if (user.status !== 2) navigate("/");
       toast.success(message);
       if (user.status !== 2) {
@@ -37,37 +35,28 @@ const CompleteProfileForm = () => {
   };
 
   return (
-    <form className="w-full space-y-8 container xl:max-w-screen-xl" onSubmit={handleSubmit}>
-      <TextField
-        label="نام و نام خانوادگی"
-        name="name"
-        onChange={(e) => {
-          setName(e.target.value);
-        }}
-        value={name}
-      />
-      <TextField
-        label="ایمیل"
-        name="email"
-        onChange={(e) => {
-          setEmail(e.target.value);
-        }}
-        value={email}
-      />
+    <form
+      className="w-full space-y-8 container xl:max-w-screen-xl"
+      onSubmit={handleSubmit(handleCmpleteProfile)}
+    >
+      <TextField label="نام و نام خانوادگی" name="name" register={register} />
+      <TextField label="ایمیل" name="email" register={register} />
       <div className="flex justify-center gap-x-8">
         <RadioInput
           label={"کارفرما"}
           name={"role"}
           value={"OWNER"}
-          onChange={(e) => setRole(e.target.value)}
-          checked={role === "OWNER"}
+          id={"OWNER"}
+          register={register}
+          checked={watch("role") === "OWNER"}
         />
         <RadioInput
           label={"فریلنسر"}
           name={"role"}
+          id={"FREELANCER"}
           value={"FREELANCER"}
-          onChange={(e) => setRole(e.target.value)}
-          checked={role === "FREELANCER"}
+          register={register}
+          checked={watch("role") === "FREELANCER"}
         />
       </div>
       {isPending ? (
