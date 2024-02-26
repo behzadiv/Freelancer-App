@@ -65,7 +65,7 @@ const CompleteProfileForm = () => {
             value={"OWNER"}
             id={"OWNER"}
             register={register}
-            checked={watch("role") === "OWNER"}
+            watch={watch}
             validationSchema={{ required: "انتخاب نقش ضروری است" }}
             errors={errors}
           />
@@ -75,7 +75,7 @@ const CompleteProfileForm = () => {
             id={"FREELANCER"}
             value={"FREELANCER"}
             register={register}
-            checked={watch("role") === "FREELANCER"}
+            watch={watch}
             validationSchema={{ required: "انتخاب نقش ضروری است" }}
             errors={errors}
           />
