@@ -1,4 +1,12 @@
-const RadioInput = ({ name, id, value, label, register, checked }) => {
+const RadioInput = ({
+  name,
+  id,
+  value,
+  label,
+  register,
+  checked,
+  validationSchema,
+}) => {
   return (
     <div className="flex justify-center gap-x-2 items-center">
       <input
@@ -6,7 +14,7 @@ const RadioInput = ({ name, id, value, label, register, checked }) => {
         name={name}
         id={id}
         value={value}
-        {...register(name)}
+        {...register(name, validationSchema)}
         checked={checked}
         className="cursor-pointer w-4 h-4 form-radio text-primary-900 focus:ring-primary-500"
       />

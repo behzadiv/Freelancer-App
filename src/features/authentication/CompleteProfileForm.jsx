@@ -1,15 +1,19 @@
-import { useState } from "react";
 import { useNavigate } from "react-router";
 import { useMutation } from "@tanstack/react-query";
+import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
 import { completeProfile } from "../../services/authService";
 import TextField from "../../ui/TextField";
 import RadioInput from "../../ui/RadioInput";
 import Loading from "../../ui/Loading";
-import { useForm } from "react-hook-form";
 
 const CompleteProfileForm = () => {
-  const { register, handleSubmit, watch } = useForm();
+  const {
+    register,
+    handleSubmit,
+    watch,
+    formState: { errors },
+  } = useForm();
   const navigate = useNavigate();
 
   const { isPending, data, mutateAsync } = useMutation({
@@ -39,25 +43,48 @@ const CompleteProfileForm = () => {
       className="w-full space-y-8 container xl:max-w-screen-xl"
       onSubmit={handleSubmit(handleCmpleteProfile)}
     >
-      <TextField label="نام و نام خانوادگی" name="name" register={register} />
-      <TextField label="ایمیل" name="email" register={register} />
-      <div className="flex justify-center gap-x-8">
-        <RadioInput
-          label={"کارفرما"}
-          name={"role"}
-          value={"OWNER"}
-          id={"OWNER"}
-          register={register}
-          checked={watch("role") === "OWNER"}
-        />
-        <RadioInput
-          label={"فریلنسر"}
-          name={"role"}
-          id={"FREELANCER"}
-          value={"FREELANCER"}
-          register={register}
-          checked={watch("role") === "FREELANCER"}
-        />
+      <TextField
+        label="نام و نام خانوادگی"
+        name="name"
+        register={register}
+        validationSchema={{ required: "نام و نام خانوادگی ضروری است" }}
+        errors={errors}
+      />
+      <TextField
+        label="ایمیل"
+        name="email"
+        register={register}
+        validationSchema={{ required: "ایمیل ضروری است" }}
+        errors={errors}
+      />
+      <div>
+        <div className="flex justify-center gap-x-8">
+          <RadioInput
+            label={"کارفرما"}
+            name={"role"}
+            value={"OWNER"}
+            id={"OWNER"}
+            register={register}
+            checked={watch("role") === "OWNER"}
+            validationSchema={{ required: "انتخاب نقش ضروری است" }}
+            errors={errors}
+          />
+          <RadioInput
+            label={"فریلنسر"}
+            name={"role"}
+            id={"FREELANCER"}
+            value={"FREELANCER"}
+            register={register}
+            checked={watch("role") === "FREELANCER"}
+            validationSchema={{ required: "انتخاب نقش ضروری است" }}
+            errors={errors}
+          />
+        </div>
+        <div className="text-center mt-2">
+          {errors && errors["role"] && (
+            <span className="text-error ">{errors["role"].message}</span>
+          )}
+        </div>
       </div>
       {isPending ? (
         <Loading />

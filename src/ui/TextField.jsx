@@ -1,4 +1,11 @@
-const TextField = ({ label, name, register, type = "text" }) => {
+const TextField = ({
+  label,
+  name,
+  register,
+  type = "text",
+  validationSchema,
+  errors,
+}) => {
   return (
     <div>
       <label htmlFor={name} className="mb-2 block">
@@ -8,10 +15,14 @@ const TextField = ({ label, name, register, type = "text" }) => {
         type={type}
         id={name}
         name={name}
-        {...register(name)}
+        {...register(name, validationSchema)}
         className="textField_input"
         autoComplete="off"
+        validationSchema={validationSchema}
       />
+      {errors && errors[name] && (
+        <span className="text-error block mt-3">{errors[name].message}</span>
+      )}
     </div>
   );
 };
