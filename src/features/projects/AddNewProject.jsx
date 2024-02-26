@@ -12,22 +12,30 @@ const AddNewProject = () => {
   const addNewProject = (data) => {
     console.log(data);
   };
-  
+
   return (
-    <form onSubmit={handleSubmit(addNewProject)}>
+    <form onSubmit={handleSubmit(addNewProject)} className="space-y-3">
       <TextField
         label={"عنوان"}
         name="title"
         register={register}
         validationSchema={{ required: "عنوان پروژه را وارد کنید" }}
         errors={errors}
+        required
       />
       <TextField
         label={"توضیحات"}
         name="description"
         register={register}
-        validationSchema={{ required: "توضیحات پروژه را وارد کنید" }}
+        validationSchema={{
+          required: "توضیحات پروژه را وارد کنید",
+          minLength: {
+            value: 15,
+            message: "حداقل 15 کاراکتر را وارد کنید",
+          },
+        }}
         errors={errors}
+        required
       />
       <TextField
         label={"بودجه"}
@@ -36,6 +44,7 @@ const AddNewProject = () => {
         register={register}
         validationSchema={{ required: "بودجه پروژه را وارد کنید" }}
         errors={errors}
+        required
       />
       <RHFselect
         label={"دسته بندی"}
