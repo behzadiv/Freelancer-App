@@ -4,8 +4,8 @@ import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
 import { completeProfile } from "../../services/authService";
 import TextField from "../../ui/TextField";
-import RadioInput from "../../ui/RadioInput";
 import Loading from "../../ui/Loading";
+import RadioInputGroup from "../../ui/RadioInputGroup";
 
 const CompleteProfileForm = () => {
   const {
@@ -57,35 +57,19 @@ const CompleteProfileForm = () => {
         validationSchema={{ required: "ایمیل ضروری است" }}
         errors={errors}
       />
-      <div>
-        <div className="flex justify-center gap-x-8">
-          <RadioInput
-            label={"کارفرما"}
-            name={"role"}
-            value={"OWNER"}
-            id={"OWNER"}
-            register={register}
-            watch={watch}
-            validationSchema={{ required: "انتخاب نقش ضروری است" }}
-            errors={errors}
-          />
-          <RadioInput
-            label={"فریلنسر"}
-            name={"role"}
-            id={"FREELANCER"}
-            value={"FREELANCER"}
-            register={register}
-            watch={watch}
-            validationSchema={{ required: "انتخاب نقش ضروری است" }}
-            errors={errors}
-          />
-        </div>
-        <div className="text-center mt-2">
-          {errors && errors["role"] && (
-            <span className="text-error ">{errors["role"].message}</span>
-          )}
-        </div>
-      </div>
+      <RadioInputGroup
+        config={{
+          name: "role",
+          options: [
+            { label: "فریلنسر", value: "FREELANCER", id: "FREELANCER" },
+            { label: "کارفرما", value: "OWNER", id: "OWNER" },
+          ],
+          validationSchema: { required: "انتخاب نقش ضروری است" },
+        }}
+        watch={watch}
+        errors={errors}
+        register={register}
+      />
       {isPending ? (
         <Loading />
       ) : (
