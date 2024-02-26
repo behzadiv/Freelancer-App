@@ -1,5 +1,6 @@
 import { useForm } from "react-hook-form";
 import TextField from "../../ui/TextField";
+import RHFselect from "../../ui/RHFselect";
 
 const AddNewProject = () => {
   const {
@@ -11,7 +12,7 @@ const AddNewProject = () => {
   const addNewProject = (data) => {
     console.log(data);
   };
-
+  
   return (
     <form onSubmit={handleSubmit(addNewProject)}>
       <TextField
@@ -35,6 +36,13 @@ const AddNewProject = () => {
         register={register}
         validationSchema={{ required: "بودجه پروژه را وارد کنید" }}
         errors={errors}
+      />
+      <RHFselect
+        label={"دسته بندی"}
+        name={"category"}
+        register={register}
+        options={[]}
+        required
       />
       <button className="btn btn-primary w-full">تایید</button>
     </form>
