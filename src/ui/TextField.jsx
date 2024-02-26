@@ -18,7 +18,6 @@ const TextField = ({
         {...register(name, validationSchema)}
         className="textField_input"
         autoComplete="off"
-        validationSchema={validationSchema}
       />
       {errors && errors[name] && (
         <span className="text-error block mt-3">{errors[name].message}</span>
