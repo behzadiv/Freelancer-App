@@ -10,7 +10,7 @@ const Modal = ({ children, title, open, onClose }) => {
         ></div>
         <div className="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-secondary-0 p-4 rounded-lg shadow-md z-50 w-[calc(100vw-2rem)] md:max-w-lg max-h-[calc(100vh-2rem)] overflow-y-auto">
           <div className="flex items-center justify-between border-b border-b-secondary-300 pb-2 mb-6 font-bold text-base">
-            <p>{title}</p>
+            <p className="text-secondary-700">{title}</p>
             <button onClick={onClose}>
               <IoClose className="w-5 h-5 text-secondary-400" />
             </button>
