@@ -3,13 +3,11 @@ import { useForm } from "react-hook-form";
 import TextField from "../../ui/TextField";
 import RHFselect from "../../ui/RHFselect";
 import { TagsInput } from "react-tag-input-component";
-import DatePicker from "react-multi-date-picker";
-import persian from "react-date-object/calendars/persian";
-import persian_fa from "react-date-object/locales/persian_fa";
+import DatepickerField from "../../ui/DatepickerField";
 
 const AddNewProject = () => {
   const [tags, setTags] = useState([]);
-  const [data, setData] = useState(new Date());
+  const [date, setDate] = useState(new Date());
   const {
     register,
     handleSubmit,
@@ -69,22 +67,7 @@ const AddNewProject = () => {
           placeHolder="تگ مورد نظر خود را وارد کنید"
         />
       </div>
-      <div>
-        <label htmlFor="deadline" className="block">
-          ددلاین
-        </label>
-        <DatePicker
-        value={data}
-        onChange={setData}
-          name="deadline"
-          format="YYYY/MM/DD"
-          containerClassName="w-full"
-          inputClass="textField_input"
-          calendar={persian}
-          locale={persian_fa}
-          calendarPosition="bottom-center"
-        />
-      </div>
+      <DatepickerField date={date} setDate={setDate} label={"ددلاین"} />
       <button className="btn btn-primary w-full">تایید</button>
     </form>
   );
