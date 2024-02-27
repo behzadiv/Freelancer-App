@@ -4,10 +4,13 @@ import TextField from "../../ui/TextField";
 import RHFselect from "../../ui/RHFselect";
 import { TagsInput } from "react-tag-input-component";
 import DatepickerField from "../../ui/DatepickerField";
+import useCategories from "./useCategories";
+import Loading from "../../ui/Loading";
 
 const AddNewProject = () => {
   const [tags, setTags] = useState([]);
   const [date, setDate] = useState(new Date());
+  const { categories, isPending } = useCategories();
   const {
     register,
     handleSubmit,
@@ -15,9 +18,10 @@ const AddNewProject = () => {
   } = useForm();
 
   const addNewProject = (data) => {
-    console.log(data);
+    console.log({ ...data, tags, date });
   };
-
+  
+  if (isPending) return <Loading />;
   return (
     <form onSubmit={handleSubmit(addNewProject)} className="space-y-3">
       <TextField
@@ -55,7 +59,7 @@ const AddNewProject = () => {
         label={"دسته بندی"}
         name={"category"}
         register={register}
-        options={[]}
+        options={categories}
         required
       />
       <div>
