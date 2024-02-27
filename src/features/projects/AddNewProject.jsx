@@ -1,13 +1,16 @@
 import { useState } from "react";
 import { useForm } from "react-hook-form";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { TagsInput } from "react-tag-input-component";
+import toast from "react-hot-toast";
+import useCategories from "./useCategories";
+import { addNewProjectApi } from "../../services/projectsService";
 import TextField from "../../ui/TextField";
 import RHFselect from "../../ui/RHFselect";
-import { TagsInput } from "react-tag-input-component";
 import DatepickerField from "../../ui/DatepickerField";
-import useCategories from "./useCategories";
 import Loading from "../../ui/Loading";
 
-const AddNewProject = () => {
+const AddNewProject = ({ isOpenModal }) => {
   const [tags, setTags] = useState([]);
   const [date, setDate] = useState(new Date());
   const { categories, isPending } = useCategories();
@@ -16,11 +19,22 @@ const AddNewProject = () => {
     handleSubmit,
     formState: { errors },
   } = useForm();
+  const { mutateAsync } = useMutation({
+    mutationFn: addNewProjectApi,
+  });
+  const queryClient = useQueryClient();
 
-  const addNewProject = (data) => {
-    console.log({ ...data, tags, date });
+  const addNewProject = async (data) => {
+    try {
+      const { message } = await mutateAsync({ ...data, tags, deadline: date });
+      toast(message);
+      isOpenModal(false);
+      queryClient.invalidateQueries("get-projects");
+    } catch (error) {
+      toast.error(error?.response?.data?.message);
+    }
   };
-  
+
   if (isPending) return <Loading />;
   return (
     <form onSubmit={handleSubmit(addNewProject)} className="space-y-3">

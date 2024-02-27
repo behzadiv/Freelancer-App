@@ -10,3 +10,8 @@ export const removeProjectApi = (id) => {
     return data.data;
   });
 };
+export const addNewProjectApi = (data) => {
+  return http.post("/project/add",data).then(({ data }) => {
+    return data.data;
+  });
+};
