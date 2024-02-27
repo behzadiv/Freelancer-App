@@ -7,8 +7,8 @@ const RHFselect = ({ label, name, register, options, required }) => {
       </label>
       <select {...register(name)} id={name} className="textField_input">
         {options.map((option) => (
-          <option key={option._id} value={option._id}>
-            {option.title}
+          <option key={option.value} value={option.value}>
+            {option.label}
           </option>
         ))}
       </select>

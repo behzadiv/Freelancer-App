@@ -6,6 +6,11 @@ export default function useCategories() {
     queryKey: ["get-categories"],
     queryFn: getAllCategoriesApi,
   });
-  const { categories } = data || [];
+
+  const { categories: rowCategories = [] } = data||[];
+  const categories = rowCategories.map((item) => {
+    return { value: item._id, label: item.title };//send value & label to RHFselect
+  });
+
   return { categories, isPending };
 }
