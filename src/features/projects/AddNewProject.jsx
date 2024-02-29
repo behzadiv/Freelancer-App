@@ -70,7 +70,12 @@ const AddNewProject = ({ onClose }) => {
         required
       />
       <div>
-        <label htmlFor="tags">تگ</label>
+        <label
+          htmlFor="tags"
+          className="mb-2 block text-secondary-700 text-right"
+        >
+          تگ
+        </label>
         <TagsInput
           value={tags}
           onChange={setTags}

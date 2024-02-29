@@ -1,7 +1,7 @@
 const RHFselect = ({ label, name, register, options, required }) => {
   return (
     <div>
-      <label className="mb-2 text-secondary-700 block">
+      <label className="mb-2 text-secondary-700 block text-right">
         {label}
         {required && <span className="text-error mr-1">*</span>}
       </label>

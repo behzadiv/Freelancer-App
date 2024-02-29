@@ -6,14 +6,19 @@ const TextField = ({
   validationSchema,
   errors,
   required,
+  placeholder,
 }) => {
   return (
     <div>
-      <label htmlFor={name} className="mb-2 block text-secondary-700">
+      <label
+        htmlFor={name}
+        className="mb-2 block text-secondary-700 text-right"
+      >
         {label}
         {required && <span className="text-error mr-1">*</span>}
       </label>
       <input
+        placeholder={placeholder}
         type={type}
         id={name}
         name={name}

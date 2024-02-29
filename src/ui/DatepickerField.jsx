@@ -5,7 +5,7 @@ import DatePicker from "react-multi-date-picker";
 const DatepickerField = ({ label, date, setDate }) => {
   return (
     <div>
-      <label htmlFor="deadline" className="block mb-2 text-secondary-700">
+      <label htmlFor="deadline" className="block mb-2 text-secondary-700 text-right">
         {label}
       </label>
       <DatePicker
