@@ -1,38 +1,31 @@
 import { useState } from "react";
 import { useForm } from "react-hook-form";
-import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { TagsInput } from "react-tag-input-component";
-import toast from "react-hot-toast";
+import useAddNewProject from "./useAddNewProject";
 import useCategories from "./useCategories";
-import { addNewProjectApi } from "../../services/projectsService";
 import TextField from "../../ui/TextField";
 import RHFselect from "../../ui/RHFselect";
 import DatepickerField from "../../ui/DatepickerField";
 import Loading from "../../ui/Loading";
 
-const AddNewProject = ({ isOpenModal }) => {
+const AddNewProject = ({ onClose }) => {
   const [tags, setTags] = useState([]);
   const [date, setDate] = useState(new Date());
   const { categories, isPending } = useCategories();
+  const { isCreating, createProject } = useAddNewProject();
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm();
-  const { mutateAsync } = useMutation({
-    mutationFn: addNewProjectApi,
-  });
-  const queryClient = useQueryClient();
 
-  const addNewProject = async (data) => {
-    try {
-      const { message } = await mutateAsync({ ...data, tags, deadline: date });
-      toast(message);
-      isOpenModal(false);
-      queryClient.invalidateQueries("get-projects");
-    } catch (error) {
-      toast.error(error?.response?.data?.message);
-    }
+  const addNewProject = (data) => {
+    const newProject = { ...data, tags, deadline: date };
+    createProject(newProject, {
+      onSuccess: () => {
+        onClose();
+      },
+    });
   };
 
   if (isPending) return <Loading />;
@@ -86,7 +79,11 @@ const AddNewProject = ({ isOpenModal }) => {
         />
       </div>
       <DatepickerField date={date} setDate={setDate} label={"ددلاین"} />
-      <button className="btn btn-primary w-full">تایید</button>
+      {isCreating ? (
+        <Loading />
+      ) : (
+        <button className="btn btn-primary w-full">تایید</button>
+      )}
     </form>
   );
 };

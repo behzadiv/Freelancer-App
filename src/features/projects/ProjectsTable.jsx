@@ -33,7 +33,7 @@ const ProjectsTable = () => {
         open={isNewProjectOpen}
         onClose={() => setIsNewProjectOpen(false)}
       >
-        <AddNewProject isOpenModal={setIsNewProjectOpen} />
+        <AddNewProject onClose={() => setIsNewProjectOpen(false)} />
       </Modal>
       <Table>
         <Table.Header>
