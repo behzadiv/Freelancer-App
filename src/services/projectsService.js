@@ -10,8 +10,18 @@ export const removeProjectApi = (id) => {
     return data.data;
   });
 };
+export const getOneProjectApi = (id) => {
+  return http.get(`/project/${id}`).then(({ data }) => {
+    return data.data;
+  });
+};
 export const addNewProjectApi = (data) => {
-  return http.post("/project/add",data).then(({ data }) => {
+  return http.post("/project/add", data).then(({ data }) => {
+    return data.data;
+  });
+};
+export const editProjectApi = ({ id, data }) => {
+  return http.patch(`/project/update/${id}`, data).then(({ data }) => {
     return data.data;
   });
 };

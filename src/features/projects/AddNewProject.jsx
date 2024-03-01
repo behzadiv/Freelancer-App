@@ -7,25 +7,53 @@ import TextField from "../../ui/TextField";
 import RHFselect from "../../ui/RHFselect";
 import DatepickerField from "../../ui/DatepickerField";
 import Loading from "../../ui/Loading";
+import useEditProject from "./useEditProject";
 
-const AddNewProject = ({ onClose }) => {
-  const [tags, setTags] = useState([]);
-  const [date, setDate] = useState(new Date());
+const AddNewProject = ({ onClose, projectToEdit = {} }) => {
+  const { _id } = projectToEdit;
+  const isEditSession = Boolean(_id);
+  const {
+    title,
+    description,
+    budget,
+    category,
+    deadline,
+    tags: prevTags,
+  } = projectToEdit;
+
+  let editValues = {};
+  if (isEditSession) {
+    editValues = { title, description, budget, category: category._id };
+  }
+  const [tags, setTags] = useState(prevTags || []);
+  const [date, setDate] = useState(new Date(deadline || ""));
   const { categories, isPending } = useCategories();
   const { isCreating, createProject } = useAddNewProject();
+  const { isEditing, editProject } = useEditProject();
   const {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm();
+  } = useForm({ defaultValues: editValues });
 
   const addNewProject = (data) => {
     const newProject = { ...data, tags, deadline: date };
-    createProject(newProject, {
-      onSuccess: () => {
-        onClose();
-      },
-    });
+    if (isEditSession) {
+      editProject(
+        { id: _id, data: newProject },
+        {
+          onSuccess: () => {
+            onClose();
+          },
+        }
+      );
+    } else {
+      createProject(newProject, {
+        onSuccess: () => {
+          onClose();
+        },
+      });
+    }
   };
 
   if (isPending) return <Loading />;
@@ -84,7 +112,7 @@ const AddNewProject = ({ onClose }) => {
         />
       </div>
       <DatepickerField date={date} setDate={setDate} label={"ددلاین"} />
-      {isCreating ? (
+      {isCreating || isEditing ? (
         <Loading />
       ) : (
         <button className="btn btn-primary w-full">تایید</button>

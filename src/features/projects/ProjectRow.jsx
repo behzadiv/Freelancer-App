@@ -1,15 +1,16 @@
 import { useState } from "react";
+import { LuPencilLine } from "react-icons/lu";
+import { IoTrashOutline } from "react-icons/io5";
+import DeleteProject from "./DeleteProject";
+import useRemoveProject from "./useRemoveProject";
+import AddNewProject from "./AddNewProject";
 import Modal from "../../ui/Modal";
 import Table from "../../ui/Table";
 import localDateShort from "../../utils/localDateShort";
 import toPersianFormat from "../../utils/toPersianFormat";
 import truncateString from "../../utils/truncateString";
-import { LuPencilLine } from "react-icons/lu";
-import { IoTrashOutline } from "react-icons/io5";
-import DeleteProject from "./DeleteProject";
-import useRemoveProject from "./useRemoveProject";
 
-const ProjectRow = ({ data, index }) => {
+const ProjectRow = ({ project, index, onClose }) => {
   const [isEditOpen, setIsEditOpen] = useState(false);
   const [isRemoveOpen, setIsRemoveOpen] = useState(false);
   const { removeProject } = useRemoveProject();
@@ -17,13 +18,13 @@ const ProjectRow = ({ data, index }) => {
   return (
     <Table.Row>
       <td>{index + 1}</td>
-      <td>{truncateString(data.title, 30)}</td>
-      <td>{data.category.title}</td>
-      <td>{toPersianFormat(data.budget)}</td>
-      <td>{localDateShort(data.deadline)}</td>
+      <td>{truncateString(project.title, 30)}</td>
+      <td>{project.category.title}</td>
+      <td>{toPersianFormat(project.budget)}</td>
+      <td>{localDateShort(project.deadline)}</td>
       <td>
         <div className="flex gap-2 justify-center flex-wrap max-w-[200px]">
-          {data.tags.map((tag) => {
+          {project.tags.map((tag) => {
             return (
               <span className="badge badge--secondary" key={tag}>
                 {tag}
@@ -32,9 +33,9 @@ const ProjectRow = ({ data, index }) => {
           })}
         </div>
       </td>
-      <td>{data.freelancer?.name || "-"}</td>
+      <td>{project.freelancer?.name || "-"}</td>
       <td>
-        {data.status === "OPEN" ? (
+        {project.status === "OPEN" ? (
           <span className="badge badge--success">باز</span>
         ) : (
           <span className="badge badge--danger">بسته</span>
@@ -47,11 +48,15 @@ const ProjectRow = ({ data, index }) => {
               <LuPencilLine className="w-5 h-5 text-primary-900" />
             </button>
             <Modal
-              title={`ویرایش ${data.title}`}
+              title={`ویرایش ${project.title}`}
               open={isEditOpen}
               onClose={() => setIsEditOpen(false)}
             >
-              this is modal
+              <AddNewProject
+                isOpenEditForm={isEditOpen}
+                projectToEdit={project}
+                onClose={() => setIsEditOpen(false)}
+              />
             </Modal>
           </>
           <>
@@ -59,18 +64,18 @@ const ProjectRow = ({ data, index }) => {
               <IoTrashOutline className="w-5 h-5 text-error" />
             </button>
             <Modal
-              title={`حذف ${data.title}`}
+              title={`حذف ${project.title}`}
               open={isRemoveOpen}
               onClose={() => setIsRemoveOpen(false)}
             >
               <DeleteProject
                 onClose={() => setIsRemoveOpen(false)}
                 onConfirm={() =>
-                  removeProject(data._id, {
+                  removeProject(project._id, {
                     onSuccess: () => setIsRemoveOpen(false),
                   })
                 }
-                resourceName={data.title}
+                resourceName={project.title}
               />
             </Modal>
           </>

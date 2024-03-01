@@ -50,7 +50,7 @@ const ProjectsTable = () => {
         <Table.Body>
           {projects.map((project, index) => {
             return (
-              <ProjectRow index={index} data={project} key={project._id} />
+              <ProjectRow index={index} project={project} key={project._id} />
             );
           })}
         </Table.Body>
