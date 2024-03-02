@@ -25,3 +25,8 @@ export const editProjectApi = ({ id, data }) => {
     return data.data;
   });
 };
+export const toggleProjectStatusApi = ({ id, data }) => {
+  return http.patch(`/project/${id}`, data).then(({ data }) => {
+    return data.data;
+  });
+};

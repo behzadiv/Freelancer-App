@@ -9,8 +9,9 @@ import Table from "../../ui/Table";
 import localDateShort from "../../utils/localDateShort";
 import toPersianFormat from "../../utils/toPersianFormat";
 import truncateString from "../../utils/truncateString";
+import ToggleProjectStatus from "./ToggleProjectStatus";
 
-const ProjectRow = ({ project, index, onClose }) => {
+const ProjectRow = ({ project, index }) => {
   const [isEditOpen, setIsEditOpen] = useState(false);
   const [isRemoveOpen, setIsRemoveOpen] = useState(false);
   const { removeProject } = useRemoveProject();
@@ -35,11 +36,12 @@ const ProjectRow = ({ project, index, onClose }) => {
       </td>
       <td>{project.freelancer?.name || "-"}</td>
       <td>
-        {project.status === "OPEN" ? (
+        <ToggleProjectStatus project={project} />
+        {/* {project.status === "OPEN" ? (
           <span className="badge badge--success">باز</span>
         ) : (
           <span className="badge badge--danger">بسته</span>
-        )}
+        )} */}
       </td>
       <td>
         <div className="flex justify-center gap-x-4">
