@@ -4,7 +4,7 @@ import toast from "react-hot-toast";
 
 export default function useToggleProject() {
   const queryClient = useQueryClient();
-  const { isPending, mutateAsync: togglingStatus } = useMutation({
+  const { isPending: isUpdating, mutateAsync: togglingStatus } = useMutation({
     mutationFn: toggleProjectStatusApi,
     onSuccess: (data) => {
       toast.success(data.message);
@@ -14,5 +14,5 @@ export default function useToggleProject() {
       toast.error(error?.response?.data?.message);
     },
   });
-  return { togglingStatus };
+  return { isUpdating, togglingStatus };
 }

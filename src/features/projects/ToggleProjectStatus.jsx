@@ -1,47 +1,29 @@
-import { useState } from "react";
-import { Switch } from "@headlessui/react";
 import useToggleProject from "./useToggleStatus";
+import Loading from "../../ui/Loading";
+import Toggle from "../../ui/Toggle";
 
 const ToggleProjectStatus = ({ project }) => {
-  const [enabled, setEnabled] = useState(
-    project.status === "OPEN" ? true : false
-  );
-  const { togglingStatus } = useToggleProject();
+  const { status, _id: id } = project;
+  const { isUpdating, togglingStatus } = useToggleProject();
   const toggleHandler = () => {
-    const status = project.status === "OPEN" ? "CLOSE" : "OPEN";
-    togglingStatus(
-      {
-        id: project._id,
-        data: { status },
-      },
-      {
-        onSuccess: () => {
-          setEnabled((prev) => !prev);
-        },
-      }
-    );
+    const newStatus = status === "OPEN" ? "CLOSE" : "OPEN";
+    togglingStatus({
+      id,
+      data: { status: newStatus },
+    });
   };
   return (
-    <Switch.Group className="w-[5rem]">
-      <div className="flex items-center">
-        <Switch.Label className="ml-2">
-          {project.status === "OPEN" ? "باز" : "بسته"}
-        </Switch.Label>
-        <Switch
-          checked={enabled}
+    <div className="w-[5rem]">
+      {isUpdating ? (
+        <Loading height="20" width="20" />
+      ) : (
+        <Toggle
+          enabled={status === "OPEN" ? true : false}
           onChange={toggleHandler}
-          className={`${
-            enabled ? "bg-primary-800" : "bg-secondary-200"
-          } relative inline-flex h-6 w-11 items-center rounded-full transition-colors focus:outline-none`}
-        >
-          <span
-            className={`${
-              enabled ? "-translate-x-6" : "-translate-x-1"
-            } inline-block h-4 w-4 transform rounded-full bg-secondary-0 transition-transform`}
-          />
-        </Switch>
-      </div>
-    </Switch.Group>
+          label={status === "OPEN" ? "باز" : "بسته"}
+        />
+      )}
+    </div>
   );
 };
 
