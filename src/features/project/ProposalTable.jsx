@@ -17,7 +17,9 @@ const ProposalTable = ({ proposals }) => {
       </Table.Header>
       <Table.Body>
         {proposals.map((proposal, index) => {
-          return <ProposalRow proposal={proposal} index={index} />;
+          return (
+            <ProposalRow proposal={proposal} index={index} key={proposal._id} />
+          );
         })}
       </Table.Body>
     </Table>

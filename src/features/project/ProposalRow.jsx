@@ -1,9 +1,13 @@
+import { useState } from "react";
+import Modal from "../../ui/Modal";
 import Table from "../../ui/Table";
 import toPersianFormat from "../../utils/toPersianFormat";
 import truncateString from "../../utils/truncateString";
+import ChangeProposalStatus from "./ChangeProposalStatus";
 
 const ProposalRow = ({ proposal, index }) => {
   const { user, description, duration, price, status } = proposal;
+  const [open, setOpen] = useState(false);
   const statusStyle = [
     { className: "badge--danger", label: "رد شده" },
     { className: "badge--secondary", label: "در انتظار تایید" },
@@ -22,7 +26,21 @@ const ProposalRow = ({ proposal, index }) => {
           {statusStyle[status].label}
         </span>
       </td>
-      <td></td>
+      <td>
+        <Modal
+          onClose={() => setOpen(false)}
+          open={open}
+          title="تغییر وضعیت درخواست"
+        >
+          <ChangeProposalStatus
+            proposalId={proposal._id}
+            onClose={() => setOpen(false)}
+          />
+        </Modal>
+        <button onClick={() => setOpen(true)} className="w-full">
+          تغییر وضعیت
+        </button>
+      </td>
     </Table.Row>
   );
 };
