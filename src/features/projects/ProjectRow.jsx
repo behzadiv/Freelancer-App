@@ -10,6 +10,8 @@ import localDateShort from "../../utils/localDateShort";
 import toPersianFormat from "../../utils/toPersianFormat";
 import truncateString from "../../utils/truncateString";
 import ToggleProjectStatus from "./ToggleProjectStatus";
+import { HiEye } from "react-icons/hi";
+import { Link } from "react-router-dom";
 
 const ProjectRow = ({ project, index }) => {
   const [isEditOpen, setIsEditOpen] = useState(false);
@@ -82,6 +84,11 @@ const ProjectRow = ({ project, index }) => {
             </Modal>
           </>
         </div>
+      </td>
+      <td>
+        <Link to={project._id}>
+          <HiEye className="w-full h-5 text-primary-900" />
+        </Link>
       </td>
     </Table.Row>
   );

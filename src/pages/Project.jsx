@@ -1,11 +1,16 @@
-import { useParams } from "react-router-dom";
+import ProjectHeader from "../features/project/ProjectHeader";
+import ProposalTable from "../features/project/ProposalTable";
+import useOneProject from "../features/project/useProject";
+import Loading from "../ui/Loading";
 
 const Project = () => {
-    const params = useParams()
-    console.log(typeof(params),params);
+  const { isLoading, project } = useOneProject();
+
+  if (isLoading) return <Loading />;
   return (
     <div>
-      <h1>project </h1>
+      <ProjectHeader project={project} />
+      <ProposalTable proposals={project.proposals} />
     </div>
   );
 };
