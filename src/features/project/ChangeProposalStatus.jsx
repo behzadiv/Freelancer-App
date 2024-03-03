@@ -2,6 +2,8 @@ import { useForm } from "react-hook-form";
 import RHFselect from "../../ui/RHFselect";
 import useChangeProposalStatus from "./useChangeProposalStatus";
 import Loading from "../../ui/Loading";
+import { useQueryClient } from "@tanstack/react-query";
+import { useParams } from "react-router-dom";
 
 const options = [
   { value: 0, label: "رد شده" },
@@ -12,6 +14,8 @@ const options = [
 const ChangeProposalStatus = ({ proposalId, onClose }) => {
   const { register, handleSubmit } = useForm();
   const { changeStatus, isUpdating } = useChangeProposalStatus();
+  const queryClient = useQueryClient();
+  const { id: projectId } = useParams();
 
   const onSubmit = (data) => {
     changeStatus(
@@ -19,6 +23,9 @@ const ChangeProposalStatus = ({ proposalId, onClose }) => {
       {
         onSuccess: () => {
           onClose();
+          queryClient.invalidateQueries({
+            queryKey: ["get-project", projectId],
+          });
         },
       }
     );
