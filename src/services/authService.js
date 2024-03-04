@@ -20,3 +20,8 @@ export const getUser = () => {
     return data.data;
   });
 };
+export const logOutApi = () => {
+  return http.post("/user/logout").then(({ data }) => {
+    return data.data;
+  });
+};
