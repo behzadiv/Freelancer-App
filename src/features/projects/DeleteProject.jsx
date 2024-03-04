@@ -4,7 +4,7 @@ const DeleteProject = ({ resourceName, onConfirm, onClose }) => {
       <p className="font-bold text-base mb-4">
         آیا از حذف پروژه {resourceName} اطمینان دارید ؟
       </p>
-      <div className="flex justify-center items-center gap-x-2 bg-red-50">
+      <div className="flex justify-center items-center gap-x-2">
         <button className="btn btn-danger w-1/2" onClick={onConfirm}>
           بله
         </button>
