@@ -1,12 +1,7 @@
-import {
-  HiLightBulb,
-  HiOutlineSun,
-  HiOutlineUser,
-  HiOutlineUserCircle,
-  HiUser,
-} from "react-icons/hi";
+import { HiOutlineUser } from "react-icons/hi";
 import { Link } from "react-router-dom";
 import LogOut from "../features/authentication/LogOut";
+import ToggleTheme from "./ToggleDarkMode";
 
 const HeaderMenu = () => {
   return (
@@ -18,7 +13,7 @@ const HeaderMenu = () => {
           </Link>
         </li>
         <li>
-          <HiOutlineSun className="w-5 h-5 text-primary-900 cursor-pointer" />
+          <ToggleTheme />
         </li>
         <li>
           <LogOut />
