@@ -1,5 +1,7 @@
+import Dashboard from "../features/owner/DashBoard";
+
 const OwnerDashboard = () => {
-  return <div>owner dashboard page</div>;
+  return <Dashboard />;
 };
 
 export default OwnerDashboard;
