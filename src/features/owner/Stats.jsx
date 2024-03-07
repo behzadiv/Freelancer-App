@@ -1,4 +1,9 @@
-import { HiOutlineViewGrid } from "react-icons/hi";
+import {
+  HiCollection,
+  HiCurrencyDollar,
+  HiOutlineViewGrid,
+} from "react-icons/hi";
+import Stat from "./stat";
 
 const Stats = ({ projects }) => {
   const numOfProjects = projects.length;
@@ -6,20 +11,31 @@ const Stats = ({ projects }) => {
     (acc, curr) => acc + curr.proposals.length,
     0
   );
+  const numOfAcceptedProjects = projects.reduce(
+    (acc, curr) => Number(curr.status === "CLOSE") + acc,
+    0
+  );
 
   return (
-    <div className="grid grid-cols-3 gap-x-8">
-      <div className="col-span-1 grid grid-rows-2 grid-cols-[6.4rem_1fr] p-4 bg-secondary-0 rounded-lg gap-x-4">
-        <div className="row-span-2 rounded-full p-2 aspect-square flex items-center justify-center bg-primary-100 text-primary-700">
-          <HiOutlineViewGrid className="w-20 h-20" />
-        </div>
-        <h5 className="font-bold text-lg text-secondary-500 self-center">
-          پروژه ها
-        </h5>
-        <p className="font-bold text-3xl text-secondary-900">{numOfProjects}</p>
-      </div>
-      <div className="col-span-1"></div>
-      <div className="col-span-1"></div>
+    <div className="grid grid-cols-1  md:grid-cols-2 lg:grid-cols-3 gap-8">
+      <Stat
+        icon={<HiOutlineViewGrid className="w-20 h-20" />}
+        title=" پروژه ها"
+        value={numOfProjects}
+        color="primary"
+      />
+      <Stat
+        icon={<HiCurrencyDollar className="w-20 h-20" />}
+        title="پروژه های واگذار شده"
+        value={numOfAcceptedProjects}
+        color="green"
+      />
+      <Stat
+        icon={<HiCollection className="w-20 h-20" />}
+        title="درخواست ها"
+        value={numOfProposal}
+        color="yellow"
+      />
     </div>
   );
 };
