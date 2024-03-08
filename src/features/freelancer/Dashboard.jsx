@@ -1,7 +1,13 @@
+import DashboardHeader from "./DashboardHeader";
+import Stats from "./Stats";
+
 const Dashboard = () => {
-    return ( 
-        <h1>freelancer dashboard</h1>
-     );
-}
- 
+  return (
+    <>
+      <DashboardHeader />
+      <Stats />
+    </>
+  );
+};
+
 export default Dashboard;
