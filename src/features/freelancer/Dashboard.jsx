@@ -1,11 +1,16 @@
+import Loading from "../../ui/Loading";
 import DashboardHeader from "./DashboardHeader";
 import Stats from "./Stats";
+import useProposalList from "./useProposalList";
 
 const Dashboard = () => {
+  const { isLoading, proposals } = useProposalList();
+
+  if (isLoading) return <Loading />;
   return (
     <>
       <DashboardHeader />
-      <Stats />
+      <Stats proposals={proposals} />
     </>
   );
 };

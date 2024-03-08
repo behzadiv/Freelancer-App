@@ -5,3 +5,8 @@ export const changeProposalStatusApi = ({ id, data }) => {
     return data.data;
   });
 };
+export const getProposalListApi = () => {
+  return http.get("/proposal/list").then(({ data }) => {
+    return data.data;
+  });
+};
