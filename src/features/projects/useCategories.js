@@ -7,10 +7,14 @@ export default function useCategories() {
     queryFn: getAllCategoriesApi,
   });
 
-  const { categories: rowCategories = [] } = data||[];
+  const { categories: rowCategories = [] } = data || [];
+  
   const categories = rowCategories.map((item) => {
-    return { value: item._id, label: item.title };//send value & label to RHFselect
+    return { value: item._id, label: item.title }; //send value & label to RHFselect
+  });
+  const transformedCategories = rowCategories.map((item) => {
+    return { value: item.englishTitle, label: item.title };
   });
 
-  return { categories, isPending };
+  return { categories, isPending, transformedCategories };
 }
