@@ -18,8 +18,9 @@ const ChangeProposalStatus = ({ proposalId, onClose }) => {
   const { id: projectId } = useParams();
 
   const onSubmit = (data) => {
+    console.log(data);
     changeStatus(
-      { data: data, id: proposalId },
+      { proposalId, projectId, ...data },
       {
         onSuccess: () => {
           onClose();
