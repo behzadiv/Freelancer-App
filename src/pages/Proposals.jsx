@@ -1,4 +1,4 @@
-import ProposalTable from "./ProposalTable";
+import ProposalTable from "../features/proposals/ProposalTable";
 
 const Proposals = () => {
   return (
