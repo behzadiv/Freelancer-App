@@ -1,8 +1,11 @@
+import { useState } from "react";
 import Table from "../../../ui/Table";
+import Modal from "../../../ui/Modal";
 import localDateShort from "../../../utils/localDateShort";
 import toPersianFormat from "../../../utils/toPersianFormat";
 import truncateString from "../../../utils/truncateString";
 import { MdAssignmentAdd } from "react-icons/md";
+import CreateProposal from "../../proposals/CreateProposal";
 
 const statusStyle = {
   OPEN: {
@@ -16,7 +19,9 @@ const statusStyle = {
 };
 
 const ProjectRow = ({ project, index }) => {
-  const { title, budget, deadline, status } = project;
+  const [isRequst, setIsRequest] = useState(false);
+  const { title, budget, deadline, status, _id } = project;
+
   return (
     <Table.Row>
       <td>{index + 1}</td>
@@ -31,7 +36,21 @@ const ProjectRow = ({ project, index }) => {
         }
       </td>
       <td>
-        <MdAssignmentAdd className="w-full h-5 text-primary-900"/>
+        <button
+          className="flex justify-center w-full"
+          onClick={() => {
+            setIsRequest(true);
+          }}
+        >
+          <MdAssignmentAdd className="w-5 h-5 text-primary-900" />
+        </button>
+        <Modal
+          title={`درخواست برای پروژه ${title}`}
+          open={isRequst}
+          onClose={() => setIsRequest(false)}
+        >
+          <CreateProposal projectId={_id} />
+        </Modal>
       </td>
     </Table.Row>
   );

@@ -5,7 +5,6 @@ import ProjectRow from "./ProjectRow";
 
 const ProjectsTable = () => {
   const { projects, isLoading } = useProjects();
-  console.log(projects);
   if (isLoading) return <Loading />;
   if (projects?.length === 0) return <div>خالی</div>;
 
