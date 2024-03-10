@@ -1,5 +1,13 @@
+import ProjectsHeader from "./projects/ProjectsHeader";
+import ProjectsTable from "./projects/ProjectsTable";
+
 const SubmittedProjects = () => {
-  return <h1>submitted projects</h1>;
+  return (
+    <>
+      <ProjectsHeader />
+      <ProjectsTable />
+    </>
+  );
 };
 
 export default SubmittedProjects;

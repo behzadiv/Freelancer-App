@@ -30,3 +30,8 @@ export const toggleProjectStatusApi = ({ id, data }) => {
     return data.data;
   });
 };
+export const getProjectsApi = () => {
+  return http.get("/project/list").then(({ data }) => {
+    return data.data;
+  });
+};
