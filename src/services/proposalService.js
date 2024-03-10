@@ -10,3 +10,8 @@ export const getProposalListApi = () => {
     return data.data;
   });
 };
+export const addProposalApi = (data) => {
+  return http.post("/proposal/add", data).then(({ data }) => {
+    return data.data;
+  });
+};

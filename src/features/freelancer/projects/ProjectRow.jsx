@@ -49,7 +49,7 @@ const ProjectRow = ({ project, index }) => {
           open={isRequst}
           onClose={() => setIsRequest(false)}
         >
-          <CreateProposal projectId={_id} />
+          <CreateProposal projectId={_id} onClose={() => setIsRequest(false)} />
         </Modal>
       </td>
     </Table.Row>
