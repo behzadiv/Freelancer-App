@@ -25,7 +25,7 @@ const ProjectsHeader = () => {
         />
         <FilterDropdown
           options={[
-            { value: "All", label: "دسته بندی(همه)" },
+            { value: "ALL", label: "دسته بندی(همه)" },
             ...transformedCategories,
           ]}
           filterField={"category"}
