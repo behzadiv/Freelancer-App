@@ -6,7 +6,7 @@ const ToggleProjectStatus = ({ project }) => {
   const { status, _id: id } = project;
   const { isUpdating, togglingStatus } = useToggleProject();
   const toggleHandler = () => {
-    const newStatus = status === "OPEN" ? "CLOSE" : "OPEN";
+    const newStatus = status === "OPEN" ? "CLOSED" : "OPEN";
     togglingStatus({
       id,
       data: { status: newStatus },
