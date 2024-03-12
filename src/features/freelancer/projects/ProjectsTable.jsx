@@ -2,11 +2,12 @@ import Loading from "../../../ui/Loading";
 import Table from "../../../ui/Table";
 import useProjects from "./useProjects";
 import ProjectRow from "./ProjectRow";
+import Empty from "../../../ui/Empty";
 
 const ProjectsTable = () => {
   const { projects, isLoading } = useProjects();
   if (isLoading) return <Loading />;
-  if (projects?.length === 0) return <div>خالی</div>;
+  if (projects?.length === 0) return <Empty resourceName="پروژه" />;
 
   return (
     <>
