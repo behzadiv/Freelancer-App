@@ -6,6 +6,7 @@ import toast from "react-hot-toast";
 import { HiArrowRight } from "react-icons/hi";
 import { checkOTP } from "../../services/authService";
 import Loading from "../../ui/Loading";
+import useRole from "../../hooks/useRole";
 
 const RESEND_OTP = 90;
 
@@ -18,7 +19,7 @@ const CheckOTPForm = ({
   const [otp, setOtp] = useState("");
   const [time, setTime] = useState(RESEND_OTP);
   const navigate = useNavigate();
-
+  const routeByRole = useRole();
   const { data, isPending, error, mutateAsync } = useMutation({
     mutationFn: checkOTP,
   });
@@ -35,9 +36,7 @@ const CheckOTPForm = ({
           icon: "👏",
         });
       }
-      if (user.role === "OWNER") return navigate("/owner");
-      if (user.role === "FREELANCER") return navigate("/freelancer");
-      if (user.role === "ADMIN") return navigate("/admin");
+      routeByRole(user.role);
     } catch (error) {
       toast.error(error?.response?.data?.message);
     }
