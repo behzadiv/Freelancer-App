@@ -19,6 +19,8 @@ import Proposals from "./pages/Proposals";
 import SubmittedProjects from "./features/freelancer/SubmittedProjects";
 import ProtectedRoute from "./ui/ProtectedRoute";
 import NotAccess from "./pages/NotAccess";
+import AdminLayout from "./features/admin/AdminLayout";
+import AdminDashboard from "./pages/AdminDashboard";
 
 const queryClinet = new QueryClient();
 
@@ -55,6 +57,17 @@ function App() {
             <Route path="dashboard" element={<FreelancerDashboard />} />
             <Route path="projects" element={<SubmittedProjects />} />
             <Route path="proposals" element={<Proposals />} />
+          </Route>
+          <Route
+            path="/admin"
+            element={
+              <ProtectedRoute>
+                <AdminLayout />
+              </ProtectedRoute>
+            }
+          >
+            <Route index element={<Navigate to={"dashboard"} replace />} />
+            <Route path="dashboard" element={<AdminDashboard />} />
           </Route>
           <Route path="/" element={<Home />} />
           <Route path="not-access" element={<NotAccess />} />
