@@ -18,6 +18,7 @@ import FreelancerDashboard from "./pages/FreelancerDashboard";
 import Proposals from "./pages/Proposals";
 import SubmittedProjects from "./features/freelancer/SubmittedProjects";
 import ProtectedRoute from "./ui/ProtectedRoute";
+import NotAccess from "./pages/NotAccess";
 
 const queryClinet = new QueryClient();
 
@@ -56,6 +57,7 @@ function App() {
             <Route path="proposals" element={<Proposals />} />
           </Route>
           <Route path="/" element={<Home />} />
+          <Route path="not-access" element={<NotAccess />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </QueryClientProvider>
