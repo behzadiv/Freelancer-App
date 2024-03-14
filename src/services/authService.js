@@ -25,3 +25,8 @@ export const logOutApi = () => {
     return data.data;
   });
 };
+export const getUsersApi = () => {
+  return http.get("/admin/user/list").then(({ data }) => {
+    return data.data;
+  });
+};
