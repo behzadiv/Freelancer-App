@@ -1,7 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 import { getUsersApi } from "../../services/authService";
 
-export default function useUser() {
+export default function useUsers() {
   const { data, isLoading } = useQuery({
     queryKey: ["get-users"],
     queryFn: getUsersApi,
