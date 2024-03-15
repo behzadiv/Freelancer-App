@@ -30,3 +30,8 @@ export const getUsersApi = () => {
     return data.data;
   });
 };
+export const changeUserStatusApi = ({ userId, data }) => {
+  return http.patch(`/admin/user/verify/${userId}`, data).then(({ data }) => {
+    return data.data;
+  });
+};

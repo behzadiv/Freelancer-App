@@ -1,6 +1,7 @@
 import { useState } from "react";
 import Table from "../../../ui/Table";
 import Modal from "../../../ui/Modal";
+import ChangeUserStatus from "./ChangeUserStatus";
 
 const statusStyle = [
   { className: "badge--danger", label: "رد شده" },
@@ -9,7 +10,7 @@ const statusStyle = [
 ];
 
 const UserRow = ({ user, index }) => {
-  const { name, email, phoneNumber, role, status } = user;
+  const { name, email, phoneNumber, role, status, _id: id } = user;
   const [open, setOpen] = useState(false);
 
   return (
@@ -40,7 +41,7 @@ const UserRow = ({ user, index }) => {
           open={open}
           onClose={() => setOpen(false)}
         >
-          initial modal
+          <ChangeUserStatus userId={id} onClose={() => setOpen(false)} />
         </Modal>
       </td>
     </Table.Row>
